@@ -29,7 +29,7 @@ sudo cp -r /etc/ansible /etc/ansible-bak
 ```
 Após ter realizado a cópia do diretório, clone este repositório, para o mesmo local do anterior.
 ```bash
-sudo git clone https://gitlab.deltasul.com.br/NicolasdaSilvaAraujo/ansible/ /etc/ansible
+sudo git clone https://github.com/devilgothies/ansible-ds/ /etc/ansible
 ```
 Após o processo, o Ansible estará pronto para uso, para rodar o playbook existente no diretório, rode o seguinte comando.
 ```bash
