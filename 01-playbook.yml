@@ -1,0 +1,33 @@
+- name: Get info of system (cpuinfo, meminfo, hostname)
+  hosts: all
+  user: manager
+  gather_facts: false
+  tasks:
+    - name: Get memory information
+      shell: "free -h | grep Mem | awk '{ print $2 }'"
+      register: memory_output
+
+    - name: Get CPU information
+      shell: "lscpu | grep 'modelo' | cut -f 2 -d ':' | sed 's/^[ \t]*//g'"
+      register: cpu_output
+
+    - name: Get hostname 
+      shell: "hostname"
+      register: hostname_output
+    
+    - name: Get computer architecture
+      shell: "uname -m"
+      register: arch_output
+
+
+    - name: Create JSON with system info
+      set_fact:
+        system_info:
+          hostname: "{{ hostname_output.stdout }}"
+          memory_info: "{{ memory_output.stdout }}"
+          cpu_info: "{{ cpu_output.stdout }}"
+          architecture: "{{ arch_output.stdout }}"
+
+    - name: Print system info
+      debug:
+        var: system_info
